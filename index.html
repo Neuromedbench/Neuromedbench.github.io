@@ -1,0 +1,694 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroMedBench | VLM模型性能排行榜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#06D6A0', // 主色调：亮绿松石色，在深色背景更突出
+                        secondary: '#118AB2', // 辅助色：亮蓝色
+                        accent: '#EF476F', // 强调色：亮粉色，增加视觉冲击力
+                        dark: '#0B0D14', // 主黑色背景
+                        'dark-card': '#161A27', // 卡片深色背景
+                        'dark-hover': '#1E2436', // 悬停状态背景
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(6, 214, 160, 0.3), 0 0 30px rgba(6, 214, 160, 0.15)',
+                        'glow-blue': '0 0 15px rgba(17, 138, 178, 0.3), 0 0 30px rgba(17, 138, 178, 0.15)',
+                        'glow-accent': '0 0 15px rgba(239, 71, 111, 0.3), 0 0 30px rgba(239, 71, 111, 0.15)',
+                        'card': '0 4px 12px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.15)',
+                    }
+                },
+            }
+        }
+    </script>
+   
+</head>
+<body class="font-inter bg-dark text-gray-100 min-h-screen flex flex-col overflow-x-hidden">
+    <!-- 背景装饰元素 -->
+    <div class="fixed inset-0 bg-grid opacity-30 z-0"></div>
+    <div class="fixed top-[-300px] right-[-200px] w-[600px] h-[600px] rounded-full bg-primary/10 blur-[100px] animate-pulse-slow z-0"></div>
+    <div class="fixed bottom-[-200px] left-[-100px] w-[500px] h-[500px] rounded-full bg-secondary/10 blur-[100px] animate-pulse-slow z-0"></div>
+    
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 glass transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-glow">
+                    <i class="fa fa-braille text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white">NeuroMed<span class="text-primary">Bench</span></h1>
+                    <p class="text-xs text-gray-400 -mt-1">VLM Neurology Evaluation Platform</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#ranking" class="text-primary font-medium hover:text-primary/80 transition-all duration-300">Ranking</a>
+                <a href="#datasets" class="text-gray-300 hover:text-primary transition-all duration-300">Dataset</a>
+                <a href="#papers" class="text-gray-300 hover:text-primary transition-all duration-300">Paper</a>
+                <a href="#about" class="text-gray-300 hover:text-primary transition-all duration-300">About Us</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button id="header-download-btn" class="hidden md:block px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 border border-primary/30">
+                    <i class="fa fa-download mr-1"></i> Downloads
+                </button>
+                <button class="md:hidden text-gray-300 hover:text-primary" id="mobile-menu-button">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="md:hidden hidden glass border-t border-white/10">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#ranking" class="text-primary font-medium py-2">Ranking</a>
+                <a href="#datasets" class="text-gray-300 hover:text-primary py-2">Dataset</a>
+                <a href="#papers" class="text-gray-300 hover:text-primary py-2">Paper</a>
+                <a href="#about" class="text-gray-300 hover:text-primary py-2">About Us</a>
+                <button class="px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 w-full text-left border border-primary/30">
+                    <i class="fa fa-download mr-1"></i> Downloads
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主横幅 -->
+    <section class="relative py-16 md:py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-dark z-0"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold mb-6 text-shadow-glow leading-tight">
+                    NeuroMedBench
+                </h2>
+                <p class="text-[clamp(1.4rem,3.5vw,2.2rem)] font-semibold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4 max-w-3xl mx-auto text-center">
+                    VLMs Neurology Diagnosis Ranking
+                </p>
+                <p class="text-[clamp(1rem,2vw,1.2rem)] text-gray-300 mb-8 max-w-2xl mx-auto">
+                    A comparative analysis of VLMs in neuro-medical diagnosis.
+                </p>
+                <div class="w-full max-w-xl mx-auto glass p-1 flex rounded-xl">
+                    <input type="text" id="global-search" placeholder="Search by model name, institution, or version..." class="flex-1 bg-transparent border-none px-4 py-3 text-white placeholder-gray-400 focus:outline-none">
+                    <button class="bg-primary text-white px-6 rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 shadow-glow">
+                        <i class="fa fa-search mr-2"></i>Search
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 装饰图形 -->
+            <div class="hidden lg:block absolute -bottom-10 -left-20 w-64 h-64 rounded-full border border-primary/20 animate-float z-0"></div>
+            <div class="hidden lg:block absolute top-20 -right-32 w-80 h-80 rounded-full border border-secondary/20 animate-float" style="animation-delay: 2s"></div>
+        </div>
+    </section>
+
+    <!-- 主要内容区 -->
+    <main class="flex-1 relative z-10">
+        <!-- 排行榜部分 -->
+        <section id="ranking" class="container mx-auto px-4 py-8 md:py-16">
+            <!-- 排行榜版本切换 -->
+            <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4 scroll-reveal">
+                <div class="scroll-reveal-left">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Leaderboard</h2>
+                    <p class="text-gray-400">The Performance of Different VLMs on Neuro-Medical Tasks</p>
+                </div>
+                
+                <div class="relative inline-block scroll-reveal-right">
+                    <select id="bench-version" class="appearance-none glass rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <option value="1.0" selected>NeuroMedBench 1.0</option>
+                        <option value="2.0">NeuroMedBench 2.0</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                        <i class="fa fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 数据集概览卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 scroll-reveal">
+                <div class="glass rounded-xl p-6 border border-primary/20 hover:border-primary/40 hover:shadow-glow hover:shadow-card transition-all duration-500 transform hover:-translate-y-1 scroll-reveal-scale scroll-reveal-delay-1">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">Direct Diagnosis</h3>
+                            <p class="text-sm text-gray-400">Factual Medical Knowledge Application in Diagnostic Scenarios.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center text-primary border border-primary/30">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <p class="text-3xl font-bold text-primary">15</p>
+                            <p class="text-xs text-gray-400">sample size</p>
+                        </div>
+                        <p class="text-sm bg-primary/15 text-primary px-3 py-1 rounded-full border border-primary/30">
+                            SOTA: 67.6%
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-xl p-6 border border-secondary/20 hover:border-secondary/40 hover:shadow-glow-blue hover:shadow-card transition-all duration-500 transform hover:-translate-y-1 scroll-reveal-scale scroll-reveal-delay-2">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">Complex Diseases</h3>
+                            <p class="text-sm text-gray-400">Diagnostic Challenges in Complex and Rare Diseases.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-secondary/15 flex items-center justify-center text-secondary border border-secondary/30">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <p class="text-3xl font-bold text-secondary">30</p>
+                            <p class="text-xs text-gray-400">sample size</p>
+                        </div>
+                        <p class="text-sm bg-secondary/15 text-secondary px-3 py-1 rounded-full border border-secondary/30">
+                            SOTA: 62.3%
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="glass rounded-xl p-6 border border-accent/20 hover:border-accent/40 hover:shadow-glow-accent hover:shadow-card transition-all duration-500 transform hover:-translate-y-1 scroll-reveal-scale scroll-reveal-delay-3">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white">Multi-round Dialogue</h3>
+                            <p class="text-sm text-gray-400">Contextual Relationships in Multi-Round Dialogue.</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-accent/15 flex items-center justify-center text-accent border border-accent/30">
+                            <i class="fa fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-end justify-between">
+                        <div>
+                            <p class="text-3xl font-bold text-accent">100</p>
+                            <p class="text-xs text-gray-400">sample size</p>
+                        </div>
+                        <p class="text-sm bg-accent/15 text-accent px-3 py-1 rounded-full border border-accent/30">
+                            SOTA: 58.7%
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 数据集切换标签 -->
+            <div class="mb-8 glass rounded-xl p-1 scroll-reveal">
+                <div class="flex">
+                    <button class="dataset-tab active flex-1 px-6 py-3 font-medium text-primary border-b-2 border-primary" data-dataset="verified">
+                        Direct Diagnosis
+                    </button>
+                    <button class="dataset-tab flex-1 px-6 py-3 font-medium text-gray-400 hover:text-gray-200" data-dataset="lite">
+                        Complex Diseases
+                    </button>
+                    <button class="dataset-tab flex-1 px-6 py-3 font-medium text-gray-400 hover:text-gray-200" data-dataset="multimodal">
+                        Multi-round Dialogue
+                    </button>
+                </div>
+            </div>
+
+            <!-- 表格控制区 -->
+            <div id="leaderboard-controls" class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 scroll-reveal">
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm text-gray-400">Sorting by:</span>
+                    <select id="sort-select" class="glass rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 hidden">
+                        <option value="resolved-desc">Accuracy Pass@1</option>
+                        <option value="resolved-asc">Accuracy_Pass5</option>
+                        <option value="model-size">Model Size</option>
+                        <option value="publish_date">日期 (最早优先)</option>
+                    </select>
+                </div>
+                
+                <div class="flex items-center space-x-2 w-full md:w-auto">
+                    <input type="text" id="table-search" placeholder="Search model ... " class="flex-1 glass rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                    <button id="clear-search" class="text-gray-400 hover:text-gray-200 transition-all duration-300">
+                        <i class="fa fa-times-circle"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 2.0 Coming Soon 占位 -->
+            <div id="leaderboard-coming-soon" class="hidden glass rounded-xl p-12 text-center border border-primary/20 hover:border-primary/40 transition-all duration-500 shadow-card scroll-reveal">
+                <div class="w-24 h-24 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 border border-primary/30">
+                    <i class="fa fa-clock-o text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-semibold text-white mb-4">NeuroMedBench 2.0 Leaderboard</h3>
+                <p class="text-xl text-gray-300 mb-6">On the way here…</p>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    The forthcoming Leaderboard v2.0 is currently under active development and will feature an expanded set of tasks and metrics tailored for neuromedical multimodal reasoning. Coming soon!
+                </p>
+                <div class="mt-8">
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
+                        <i class="fa fa-rocket mr-2"></i>
+                        Coming Soon
+                    </span>
+                </div>
+            </div>
+
+            <!-- 排行榜表格 -->
+            <div id="leaderboard-table-card" class="glass rounded-xl overflow-hidden border border-white/10 shadow-card scroll-reveal">
+                <div class="overflow-x-auto scrollbar-hide">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-dark-card/50 border-b border-white/10">
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider w-10">Ranking</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                                    Model
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider sortable" data-sort="model-size">
+                                    <div class="flex items-center">
+                                        Model Size(B)
+                                        <i class="fa fa-chevron-down ml-1 text-xs sort-icon"></i>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider sortable" data-sort="resolved">
+                                    <div class="flex items-center">
+                                        Accuracy (@Pass1)
+                                        <i class="fa fa-chevron-down ml-1 text-xs sort-icon"></i>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider sortable" data-sort="pass5">
+                                    <div class="flex items-center">
+                                        Accuracy (@Pass5)
+                                        <i class="fa fa-chevron-down ml-1 text-xs sort-icon"></i>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider sortable bert-score-column" data-sort="bertscore">
+                                    <div class="flex items-center">
+                                        BertScore
+                                        <i class="fa fa-chevron-down ml-1 text-xs sort-icon"></i>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Version</th>
+                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ranking-table" class="divide-y divide-white/5">
+                            <!-- 表格内容将通过JavaScript动态生成 -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 加载状态 -->
+                <div id="loading-indicator" class="py-12 text-center hidden">
+                    <div class="inline-block w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+                    <p class="mt-4 text-gray-400">LLLoading...</p>
+                </div>
+                
+                <!-- 无结果状态 -->
+                <div id="no-results" class="py-16 text-center hidden">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-dark-card flex items-center justify-center text-gray-500 mb-4">
+                        <i class="fa fa-search text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-white mb-1">404: Model Not Found</h3>
+                    <p class="text-gray-400">Try a different keyword</p>
+                </div>
+            </div>
+            
+            <!-- 性能成本分布图表 -->
+            <div id="leaderboard-chart-card" class="mt-12 glass rounded-xl p-6 border border-white/10 shadow-card">
+                <h3 class="text-lg font-semibold text-white mb-6">Performance vs. Cost </h3>
+                <div class="h-80">
+                    <canvas id="performance-chart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 数据集部分 -->
+        <section id="datasets" class="py-16 md:py-24 relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-dark to-dark-card/50 z-0"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-4 scroll-reveal">
+                    <div class="scroll-reveal-left max-w-3xl">
+                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-2">Dataset</h2>
+                        <p class="text-gray-400">We offer carefully curated and annotated neuromedicine datasets designed to support the training and evaluation of VLM models.</p>
+                    </div>
+                    
+                    <div class="relative inline-block scroll-reveal-right">
+                        <select id="dataset-version" class="appearance-none glass rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                            <option value="1.0">NeuroMedBench 1.0</option>
+                            <option value="2.0">NeuroMedBench 2.0</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                            <i class="fa fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dataset v1.0 内容 -->
+                <div id="dataset-v1" class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto scroll-reveal">
+                    <!-- 数据集1 -->
+                    <div class="glass rounded-xl overflow-hidden hover:shadow-glow transition-all duration-500 transform hover:-translate-y-2 group shadow-card scroll-reveal-left scroll-reveal-delay-1">
+                        <div class="h-48 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-grid opacity-30"></div>
+                            <i class="fa fa-database text-primary text-6xl group-hover:scale-110 transition-transform duration-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2">Direct Diagnosis</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Straightforward cases with clear diagnostic cues.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                    Quick Test
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
+                                    Prototypicality
+                                </span>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button data-download="direct-diagnosis" class="flex-1 px-4 py-2 bg-primary text-white rounded-lg text-center hover:bg-primary/90 transition-all duration-300 text-sm shadow-glow">
+                                    <i class="fa fa-download mr-1"></i> <span class="download-text">Download dataset</span>
+                                </button>
+                                <a href="#" class="px-4 py-2 border border-primary/30 text-primary rounded-lg hover:bg-primary/5 transition-all duration-300">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 数据集2 -->
+                    <div class="glass rounded-xl overflow-hidden hover:shadow-glow-blue transition-all duration-500 transform hover:-translate-y-2 group shadow-card scroll-reveal-right scroll-reveal-delay-2">
+                        <div class="h-48 bg-gradient-to-r from-secondary/20 to-accent/20 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-grid opacity-30"></div>
+                            <i class="fa fa-file-text-o text-secondary text-6xl group-hover:scale-110 transition-transform duration-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2">Complex Diseases</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Ambiguous presentations or rare neurological diseases requiring deeper inference.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+                                    Deep Inference
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
+                                    Rare Diseases 
+                                </span>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button data-download="complex-diseases" class="flex-1 px-4 py-2 bg-secondary text-white rounded-lg text-center hover:bg-secondary/90 transition-all duration-300 text-sm shadow-glow-blue">
+                                    <i class="fa fa-download mr-1"></i> <span class="download-text">Download dataset</span>
+                                </button>
+                                <a href="#" class="px-4 py-2 border border-secondary/30 text-secondary rounded-lg hover:bg-secondary/5 transition-all duration-300">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 数据集3 -->
+                    <div class="glass rounded-xl overflow-hidden hover:shadow-glow transition-all duration-500 transform hover:-translate-y-2 group shadow-card">
+                        <div class="h-48 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-grid opacity-30"></div>
+                            <i class="fa fa-bolt text-accent text-6xl group-hover:scale-110 transition-transform duration-500"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-2">Multi-round Dialogue</h3>
+                            <p class="text-gray-400 mb-4 text-sm">Simulated consult-style dialogue requiring iterative reasoning and multimodal synthesis.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent/10 text-accent border border-accent/20">
+                                    Iterative Reasoning 
+                                </span>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
+                                    Consult-style
+                                </span>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button data-download="multi-round-dialogue" class="flex-1 px-4 py-2 bg-accent text-white rounded-lg text-center hover:bg-accent/90 transition-all duration-300 text-sm shadow-glow-accent">
+                                    <i class="fa fa-download mr-1"></i> <span class="download-text">Download dataset</span>
+                                </button>
+                                <a href="#" class="px-4 py-2 border border-accent/30 text-accent rounded-lg hover:bg-accent/5 transition-all duration-300">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 数据集4 -->
+                    <!-- <div class="glass rounded-xl overflow-hidden border-2 border-dashed border-gray-700 flex flex-col justify-center items-center p-6 hover:border-primary/50 hover:text-primary transition-all duration-500 group shadow-card">
+                        <div class="w-16 h-16 rounded-full bg-dark-card flex items-center justify-center text-gray-500 mb-4 group-hover:text-primary transition-colors duration-300">
+                            <i class="fa fa-plus text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-500 mb-2 group-hover:text-primary transition-colors duration-300">Upload your new dataset</h3>
+                        <p class="text-gray-400 mb-4 text-sm text-center">Contribute to the community</p>
+                        <button data-upload class="px-4 py-2 border border-gray-700 text-gray-400 rounded-lg hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all duration-300 group-hover:shadow-glow">
+                            <i class="fa fa-upload mr-1"></i> Upload here
+                        </button>
+                    </div> -->
+                </div>
+                
+                <!-- Dataset v2.0 内容 -->
+                <div id="dataset-v2" class="hidden max-w-5xl mx-auto scroll-reveal">
+                    <div class="glass rounded-xl p-12 text-center border border-primary/20 hover:border-primary/40 transition-all duration-500 shadow-card">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 border border-primary/30">
+                            <i class="fa fa-clock-o text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-white mb-4">NeuroMedBench 2.0</h3>
+                        <p class="text-xl text-gray-300 mb-6">On the way here…</p>
+                        <p class="text-gray-400 max-w-2xl mx-auto">
+                            The forthcoming Dataset v2.0 is currently under active development and will incorporate a broader collection of high-quality neuromedical datasets.
+                            It is designed to support increasingly complex multimodal tasks and to facilitate more accurate diagnostic evaluations. Coming soon!
+                        </p>
+                        <div class="mt-8">
+                            <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20">
+                                <i class="fa fa-rocket mr-2"></i>
+                                Coming Soon
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 研究论文部分 -->
+        <section id="papers" class="py-16 md:py-24 relative">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl mx-auto text-center mb-16 scroll-reveal">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Paper</h2>
+                    <p class="text-gray-400">Academic research related to Neuro-MedBench</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto scroll-reveal">
+                    <!-- 论文列表 -->
+                    <div class="space-y-6">
+                        <!-- 论文1 -->
+                        <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card scroll-reveal-left scroll-reveal-delay-1">
+                            <div class="flex flex-col md:flex-row md:items-start gap-6">
+                                <div class="md:w-1/4">
+                                    <div class="bg-dark-card rounded-lg overflow-hidden h-32 flex items-center justify-center border border-primary/20 group hover:border-primary/40 transition-all duration-300">
+                                        <i class="fa fa-file-pdf-o text-primary text-4xl group-hover:scale-110 transition-transform duration-300"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-3/4">
+                                    <h3 class="text-lg font-semibold text-white mb-2">Beyond Classification Accuracy: Neural-MedBench and the Need for Deeper Reasoning Benchmarks</h3>
+                                    <p class="text-gray-400 text-sm mb-3">MiaoJin, Mengting Jia, Shangyang Li, et al. (2025). This paper introduces the construction method and evaluation metrics of the Neuro-MedBench 1.0 benchmark test set, which provides a standardized medical diagnostic capability evaluation scheme for VLM models.</p>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                            Benchmark
+                                        </span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
+                                            2025
+                                        </span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
+                                            Publishing
+                                        </span>
+                                    </div>
+                                    <div class="flex space-x-3">
+                                        <a href="#" class="px-3 py-1.5 bg-primary text-white rounded-lg text-sm hover:bg-primary/90 transition-all duration-300 shadow-glow">
+                                            <i class="fa fa-download mr-1"></i> PDF
+                                        </a>
+                                        <a href="#" class="px-3 py-1.5 border border-gray-700 text-gray-300 rounded-lg text-sm hover:bg-white/5 transition-all duration-300">
+                                            <i class="fa fa-external-link mr-1"></i> more
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 论文2 -->
+                        <div class="glass rounded-xl p-6 hover:shadow-glow-blue transition-all duration-500 transform hover:-translate-y-1 shadow-card scroll-reveal-right scroll-reveal-delay-2">
+                            <div class="flex flex-col md:flex-row md:items-start gap-6">
+                                <div class="md:w-1/4">
+                                    <div class="bg-dark-card rounded-lg overflow-hidden h-32 flex items-center justify-center border border-secondary/20 group hover:border-secondary/40 transition-all duration-300">
+                                        <i class="fa fa-file-pdf-o text-secondary text-4xl group-hover:scale-110 transition-transform duration-300"></i>
+                                    </div>
+                                </div>
+                                <div class="md:w-3/4">
+                                    <h3 class="text-lg font-semibold text-white mb-2">Neuro-MedBench 2.0 </h3>
+                                    <p class="text-gray-400 text-sm mb-3"> Coming </p>
+                                    <div class="flex flex-wrap gap-2 mb-3">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
+                                            Benchmark
+                                        </span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
+                                            Furture
+                                        </span>
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
+                                            Coming Soon
+                                        </span>
+                                    </div>
+                                    <div class="flex space-x-3">
+                                        <a href="#" class="px-3 py-1.5 bg-secondary text-white rounded-lg text-sm hover:bg-secondary/90 transition-all duration-300 shadow-glow-blue">
+                                            <i class="fa fa-download mr-1"></i> PDF
+                                        </a>
+                                        <a href="#" class="px-3 py-1.5 border border-gray-700 text-gray-300 rounded-lg text-sm hover:bg-white/5 transition-all duration-300">
+                                            <i class="fa fa-external-link mr-1"></i> more
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    
+                    <!-- 加载更多按钮 -->
+                    <div class="mt-10 text-center">
+                        <button class="px-6 py-2.5 border border-primary/30 text-primary rounded-lg hover:bg-primary/10 transition-all duration-300 hover:shadow-glow">
+                            <i class="fa fa-refresh mr-2"></i> more papers...
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div></section>
+        
+        <!-- 关于我们部分 -->
+        <section id="about" class="py-16 md:py-24 relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-dark-card/50 to-dark z-0"></div>
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl mx-auto text-center mb-16 scroll-reveal">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">About Us</h2>
+                    <p class="text-gray-400">Pioneering the exploration of large models in neuro-medicine, empowering AI-driven precision diagnosis and treatment of neurological disorders.</p>
+                </div>
+                
+                <!-- 联系信息 -->
+                <div class="max-w-3xl mx-auto glass rounded-xl p-8 border border-white/10 shadow-card">
+                    <h3 class="text-xl font-semibold text-center mb-8">Contact Us</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-medium mb-4 flex items-center">
+                                <i class="fa fa-map-marker text-primary mr-2"></i> Hugging Face
+                            </h4>
+                            <p class="text-gray-400 mb-6">这里需要一个hugging face的链接</p>
+                            
+                            <h4 class="text-lg font-medium mb-4 flex items-center">
+                                <i class="fa fa-envelope text-primary mr-2"></i> Email
+                            </h4>
+                            <p class="text-gray-400 mb-6">jiamengting@gdiist.cn</p>
+                        </div>
+                        
+                        <div>
+                            
+                            <h4 class="text-lg font-medium mb-4 flex items-center">
+                                <i class="fa fa-weixin text-primary mr-2"></i> Official Website
+                            </h4>
+                            <p class="text-gray-400 mb-6">https://www.gdiist.cn/</p>
+                            </h4>
+                            <div class="bg-dark-card p-2 inline-block rounded-lg border border-white/10">
+                                <img src="https://imgur.com/a/T7drtsb" alt="微信公众号二维码" class="w-32 h-32">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 社交媒体 -->
+                    <div class="mt-10 text-center">
+                        <h4 class="text-lg font-medium mb-6">Follow Us</h4>
+                        <div class="flex justify-center space-x-6">
+                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
+                                <i class="fa fa-weibo text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
+                                <i class="fa fa-github text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
+                                <i class="fa fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
+                                <i class="fa fa-twitter text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-card py-12 border-t border-white/10 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-glow">
+                            <i class="fa fa-braille text-white text-sm"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">NeuroMed<span class="text-primary">Bench</span></h3>
+                    </div>
+                    <p class="text-sm text-gray-400"> Advancing AI in healthcare through rigorous evaluation in neurology.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#ranking" class="text-gray-400 hover:text-primary transition-all duration-300">Leaderboard</a></li>
+                        <li><a href="#datasets" class="text-gray-400 hover:text-primary transition-all duration-300">Dataset</a></li>
+                        <li><a href="#papers" class="text-gray-400 hover:text-primary transition-all duration-300">Paper</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-primary transition-all duration-300">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-all duration-300">API Documents</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-all duration-300">Developer Guide</a></li>
+                        <li><a href="#datasets" class="text-gray-400 hover:text-primary transition-all duration-300">Dataset Download</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-all duration-300">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium mb-4">Subscribe for Updates</h4>
+                    <p class="text-sm text-gray-400 mb-3">Subscribe to our newsletter for the latest research updates and dataset releases.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email address" class="flex-1 bg-dark border border-white/10 rounded-l-lg px-3 py-2 text-sm focus:outline-none focus:border-primary">
+                        <button class="bg-primary text-white px-3 py-2 rounded-r-lg hover:bg-primary/90 transition-all duration-300 shadow-glow">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-10 pt-6 text-sm text-center text-gray-500">
+                <p>© 2025 NeuroMedBench. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 模型详情模态框 -->
+    <div id="model-modal" class="fixed inset-0 bg-black/70 backdrop-blur-xl z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-all duration-300 border border-white/10 shadow-card">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center sticky top-0 bg-dark-card/80 backdrop-blur-xl z-10">
+                <h3 id="modal-title" class="text-xl font-bold text-white">模型详情</h3>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-200">
+                    <i class="fa fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="p-6">
+                <!-- 模态框内容将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript文件 -->
+    <script src="js/data.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+
+    </body></html>

@@ -1,0 +1,125 @@
+/* NeuroMedBench - 主样式文件 */
+
+/* Tailwind自定义样式 */
+@layer utilities {
+    .content-auto {
+        content-visibility: auto;
+    }
+    .text-shadow-glow {
+        text-shadow: 0 0 10px rgba(6, 214, 160, 0.5);
+    }
+    .bg-grid {
+        background-size: 40px 40px;
+        background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    }
+    .backdrop-blur-xl {
+        backdrop-filter: blur(24px);
+    }
+    .glass {
+        background: rgba(22, 26, 39, 0.85); /* 提高不透明度增强实体感 */
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.12); /* 稍亮的边框增强立体感 */
+    }
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
+    .animate-pulse-slow {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .sort-icon {
+        transition: transform 0.3s ease;
+    }
+    .sort-icon.desc {
+        transform: rotate(180deg);
+    }
+    
+    /* 滚动动画效果 */
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .scroll-reveal.revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* 不同的动画延迟 */
+    .scroll-reveal-delay-1 { transition-delay: 0.1s; }
+    .scroll-reveal-delay-2 { transition-delay: 0.2s; }
+    .scroll-reveal-delay-3 { transition-delay: 0.3s; }
+    .scroll-reveal-delay-4 { transition-delay: 0.4s; }
+    .scroll-reveal-delay-5 { transition-delay: 0.5s; }
+    
+    /* 从左侧滑入 */
+    .scroll-reveal-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .scroll-reveal-left.revealed {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    /* 从右侧滑入 */
+    .scroll-reveal-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .scroll-reveal-right.revealed {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    /* 缩放效果 */
+    .scroll-reveal-scale {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .scroll-reveal-scale.revealed {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 自定义滚动条样式 */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .glass {
+        backdrop-filter: blur(8px);
+    }
+    
+    .scroll-reveal,
+    .scroll-reveal-left,
+    .scroll-reveal-right,
+    .scroll-reveal-scale {
+        transform: translateY(30px);
+        transition-duration: 0.6s;
+    }
+    
+    .scroll-reveal-left {
+        transform: translateX(-30px);
+    }
+    
+    .scroll-reveal-right {
+        transform: translateX(30px);
+    }
+}
