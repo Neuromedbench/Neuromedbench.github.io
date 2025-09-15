@@ -2,6 +2,13 @@
 
 // 初始化图表
 function initChart() {
+    //新增开关，ture表示只显示表格，false只显示performance&cost表格(20250912修改)
+    const forceShowImage = true;  // 改成 false 就用原来的 Chart
+    if (forceShowImage) {
+        document.getElementById('performance-chart').style.display = 'none';
+        document.getElementById('performance-image').classList.remove('hidden');
+        return;
+    }
     // 如果 2.0 Coming Soon 可见，则不初始化图表
     const comingSoon = document.getElementById('leaderboard-coming-soon');
     if (comingSoon && !comingSoon.classList.contains('hidden')) {
@@ -161,10 +168,6 @@ function openModelModal(model, rank) {
                     <div class="flex">
                         <div class="w-24 text-gray-400">Eval Date:</div>
                         <div class="text-white">${model.date}</div>
-                    </div>
-                    <div class="flex">
-                        <div class="w-24 text-gray-400">Version:</div>
-                        <div class="text-white">${model.version}</div>
                     </div>
                     <div class="flex flex-wrap gap-2 mt-2">
                         ${model.new ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-900/30 text-green-400 border border-green-500/20">New Model</span>' : ''}
