@@ -1,7 +1,7 @@
 <html lang="zh-CN"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeuroMedBench | VLM模型性能排行榜</title>
+    <title>NeuralMedBench</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
@@ -50,7 +50,7 @@
                     <i class="fa fa-braille text-white text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-white">NeuroMed<span class="text-primary">Bench</span></h1>
+                    <h1 class="text-xl font-bold text-white">NeuralMed<span class="text-primary">Bench</span></h1>
                     <p class="text-xs text-gray-400 -mt-1">VLM Neurology Evaluation Platform</p>
                 </div>
             </div>
@@ -58,7 +58,7 @@
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="#ranking" class="text-primary font-medium hover:text-primary/80 transition-all duration-300">Ranking</a>
                 <a href="#datasets" class="text-gray-300 hover:text-primary transition-all duration-300">Dataset</a>
-                <a href="#papers" class="text-gray-300 hover:text-primary transition-all duration-300">Paper</a>
+                <a href="#News" class="text-gray-300 hover:text-primary transition-all duration-300">News</a>
                 <a href="#about" class="text-gray-300 hover:text-primary transition-all duration-300">About Us</a>
             </nav>
             
@@ -77,7 +77,7 @@
             <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
                 <a href="#ranking" class="text-primary font-medium py-2">Ranking</a>
                 <a href="#datasets" class="text-gray-300 hover:text-primary py-2">Dataset</a>
-                <a href="#papers" class="text-gray-300 hover:text-primary py-2">Paper</a>
+                <a href="#News" class="text-gray-300 hover:text-primary py-2">News</a>
                 <a href="#about" class="text-gray-300 hover:text-primary py-2">About Us</a>
                 <button class="px-4 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 w-full text-left border border-primary/30">
                     <i class="fa fa-download mr-1"></i> Downloads
@@ -92,7 +92,7 @@
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold mb-6 text-shadow-glow leading-tight">
-                    NeuroMedBench
+                    NeuralMedBench
                 </h2>
                 <p class="text-[clamp(1.4rem,3.5vw,2.2rem)] font-semibold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-4 max-w-3xl mx-auto text-center">
                     VLMs Neurology Diagnosis Ranking
@@ -127,8 +127,8 @@
                 
                 <div class="relative inline-block scroll-reveal-right">
                     <select id="bench-version" class="appearance-none glass rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
-                        <option value="1.0" selected>NeuroMedBench 1.0</option>
-                        <option value="2.0">NeuroMedBench 2.0</option>
+                        <option value="1.0" selected>NeuralMedBench 1.0</option>
+                        <option value="2.0">NeuralMedBench 2.0</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
                         <i class="fa fa-chevron-down text-xs"></i>
@@ -154,7 +154,7 @@
                             <p class="text-xs text-gray-400">sample size</p>
                         </div>
                         <p class="text-sm bg-primary/15 text-primary px-3 py-1 rounded-full border border-primary/30">
-                            SOTA: 67.6%
+                            SOTA: 46.7%
                         </p>
                     </div>
                 </div>
@@ -171,11 +171,11 @@
                     </div>
                     <div class="flex items-end justify-between">
                         <div>
-                            <p class="text-3xl font-bold text-secondary">30</p>
+                            <p class="text-3xl font-bold text-secondary">20</p>
                             <p class="text-xs text-gray-400">sample size</p>
                         </div>
                         <p class="text-sm bg-secondary/15 text-secondary px-3 py-1 rounded-full border border-secondary/30">
-                            SOTA: 62.3%
+                            SOTA: 40.0%
                         </p>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                             <p class="text-xs text-gray-400">sample size</p>
                         </div>
                         <p class="text-sm bg-accent/15 text-accent px-3 py-1 rounded-full border border-accent/30">
-                            SOTA: 58.7%
+                            SOTA: 18.5%
                         </p>
                     </div>
                 </div>
@@ -242,7 +242,7 @@
                 <div class="w-24 h-24 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 border border-primary/30">
                     <i class="fa fa-clock-o text-4xl"></i>
                 </div>
-                <h3 class="text-2xl font-semibold text-white mb-4">NeuroMedBench 2.0 Leaderboard</h3>
+                <h3 class="text-2xl font-semibold text-white mb-4">NeuralMedBench 2.0 Leaderboard</h3>
                 <p class="text-xl text-gray-300 mb-6">On the way here…</p>
                 <p class="text-gray-400 max-w-2xl mx-auto">
                     The forthcoming Leaderboard v2.0 is currently under active development and will feature an expanded set of tasks and metrics tailored for neuromedical multimodal reasoning. Coming soon!
@@ -289,8 +289,6 @@
                                         <i class="fa fa-chevron-down ml-1 text-xs sort-icon"></i>
                                     </div>
                                 </th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Version</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Details</th>
                             </tr>
                         </thead>
                         <tbody id="ranking-table" class="divide-y divide-white/5">
@@ -315,13 +313,23 @@
                 </div>
             </div>
             
+
             <!-- 性能成本分布图表 -->
             <div id="leaderboard-chart-card" class="mt-12 glass rounded-xl p-6 border border-white/10 shadow-card">
-                <h3 class="text-lg font-semibold text-white mb-6">Performance vs. Cost </h3>
-                <div class="h-80">
-                    <canvas id="performance-chart"></canvas>
+                <h3 class="text-lg font-semibold text-white mb-6"> Overview of Neural-MedBench </h3>
+                <div class="h-[500px]flex items-center justify-center">   <!-- 高度加大 -->
+                    <!-- 图片：初始隐藏 -->
+                    <img id="performance-image" 
+                        src="./img/Figure2_black.jpg" 
+                        alt="Overview of Neural-MedBench" 
+                        class="max-h-full max-w-full rounded-lg shadow-lg object-contain" />
+
+                    <!-- 仍然保留 canvas，避免 JS 报错 -->
+                    <canvas id="performance-chart" class="w-full h-full"></canvas>
                 </div>
             </div>
+
+
         </section>
         
         <!-- 数据集部分 -->
@@ -336,8 +344,8 @@
                     
                     <div class="relative inline-block scroll-reveal-right">
                         <select id="dataset-version" class="appearance-none glass rounded-lg px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
-                            <option value="1.0">NeuroMedBench 1.0</option>
-                            <option value="2.0">NeuroMedBench 2.0</option>
+                            <option value="1.0">NeuralMedBench 1.0</option>
+                            <option value="2.0">NeuralMedBench 2.0</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
                             <i class="fa fa-chevron-down text-xs"></i>
@@ -450,7 +458,7 @@
                         <div class="w-24 h-24 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 border border-primary/30">
                             <i class="fa fa-clock-o text-4xl"></i>
                         </div>
-                        <h3 class="text-2xl font-semibold text-white mb-4">NeuroMedBench 2.0</h3>
+                        <h3 class="text-2xl font-semibold text-white mb-4">NeuralMedBench 2.0</h3>
                         <p class="text-xl text-gray-300 mb-6">On the way here…</p>
                         <p class="text-gray-400 max-w-2xl mx-auto">
                             The forthcoming Dataset v2.0 is currently under active development and will incorporate a broader collection of high-quality neuromedical datasets.
@@ -465,92 +473,100 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>   
+
         
-        <!-- 研究论文部分 -->
-        <section id="papers" class="py-16 md:py-24 relative">
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="max-w-3xl mx-auto text-center mb-16 scroll-reveal">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Paper</h2>
-                    <p class="text-gray-400">Academic research related to Neuro-MedBench</p>
+            <!-- News 部分 -->
+            <section id="News" class="py-16 md:py-24 relative">
+                <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-3xl mx-auto text-center mb-12 scroll-reveal">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">News</h2>
+                    <p class="text-gray-400">Latest updates related to Neural-MedBench</p>
+                    </div>
+
+                    <div class="w-full scroll-reveal">
+            <!-- News 1 -->
+            <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3">
+                <span class="text-yellow-400 text-lg">📃</span>
+                <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
+                    <!-- 发光日期 -->
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 
+                                shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">
+                    2025-09-17
+                    </span>
+                    <span>Neural-Benchmark: Pioneering Research Now Live on arXiv.</span>
+                </h3>
+            </div>
+            <!-- News 2 -->
+            <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3">
+                <span class="text-yellow-400 text-lg">🚀</span>
+                <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
+                    <!-- 发光日期 -->
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 
+                                shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">
+                    2025-09-12
+                    </span>
+                    <span>Leaderboard is on! Check out the result!</span>
+                </h3>
+            </div>
+                 
+            <!-- News 3 -->
+            <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3">
+            <span class="text-blue-400 text-lg">🛠️</span>
+            <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                            bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 
+                            shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">
+                2025-05-17
+                </span>
+                <span>We release the evaluation code! Check out the Usage.</span>
+            </h3>
+            </div>
+
+            <!-- News 4 -->
+            <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3">
+            <span class="text-green-400 text-lg">📊</span>
+            <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                            bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 
+                            shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">
+                2025-05-16
+                </span>
+                <span>We release the Neural-MedBench dataset</span>
+            </h3>
+            </div>
+
+            <!-- News 5 -->
+            <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3">
+            <!-- 左侧图标 -->
+            <span class="text-red-400 text-lg">✨</span>
+
+            <!-- 内容区 -->
+            <div class="flex-1">
+                <!-- 第一行：日期 + 标题 -->
+                <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                            bg-emerald-500/10 text-emerald-300 border border-emerald-400/30
+                            shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">
+                    2025-05-15
+                </span>
+                <h3 class="text-lg font-semibold text-white">
+                    We introduce Neural-MedBench
+                </h3>
                 </div>
 
-                <div class="max-w-4xl mx-auto scroll-reveal">
-                    <!-- 论文列表 -->
-                    <div class="space-y-6">
-                        <!-- 论文1 -->
-                        <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card scroll-reveal-left scroll-reveal-delay-1">
-                            <div class="flex flex-col md:flex-row md:items-start gap-6">
-                                <div class="md:w-1/4">
-                                    <div class="bg-dark-card rounded-lg overflow-hidden h-32 flex items-center justify-center border border-primary/20 group hover:border-primary/40 transition-all duration-300">
-                                        <i class="fa fa-file-pdf-o text-primary text-4xl group-hover:scale-110 transition-transform duration-300"></i>
-                                    </div>
-                                </div>
-                                <div class="md:w-3/4">
-                                    <h3 class="text-lg font-semibold text-white mb-2">Beyond Classification Accuracy: Neural-MedBench and the Need for Deeper Reasoning Benchmarks</h3>
-                                    <p class="text-gray-400 text-sm mb-3">MiaoJin, Mengting Jia, Shangyang Li, et al. (2025). This paper introduces the construction method and evaluation metrics of the Neuro-MedBench 1.0 benchmark test set, which provides a standardized medical diagnostic capability evaluation scheme for VLM models.</p>
-                                    <div class="flex flex-wrap gap-2 mb-3">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                            Benchmark
-                                        </span>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
-                                            2025
-                                        </span>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
-                                            Publishing
-                                        </span>
-                                    </div>
-                                    <div class="flex space-x-3">
-                                        <a href="#" class="px-3 py-1.5 bg-primary text-white rounded-lg text-sm hover:bg-primary/90 transition-all duration-300 shadow-glow">
-                                            <i class="fa fa-download mr-1"></i> PDF
-                                        </a>
-                                        <a href="#" class="px-3 py-1.5 border border-gray-700 text-gray-300 rounded-lg text-sm hover:bg-white/5 transition-all duration-300">
-                                            <i class="fa fa-external-link mr-1"></i> more
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- 论文2 -->
-                        <div class="glass rounded-xl p-6 hover:shadow-glow-blue transition-all duration-500 transform hover:-translate-y-1 shadow-card scroll-reveal-right scroll-reveal-delay-2">
-                            <div class="flex flex-col md:flex-row md:items-start gap-6">
-                                <div class="md:w-1/4">
-                                    <div class="bg-dark-card rounded-lg overflow-hidden h-32 flex items-center justify-center border border-secondary/20 group hover:border-secondary/40 transition-all duration-300">
-                                        <i class="fa fa-file-pdf-o text-secondary text-4xl group-hover:scale-110 transition-transform duration-300"></i>
-                                    </div>
-                                </div>
-                                <div class="md:w-3/4">
-                                    <h3 class="text-lg font-semibold text-white mb-2">Neuro-MedBench 2.0 </h3>
-                                    <p class="text-gray-400 text-sm mb-3"> Coming </p>
-                                    <div class="flex flex-wrap gap-2 mb-3">
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary/10 text-secondary border border-secondary/20">
-                                            Benchmark
-                                        </span>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
-                                            Furture
-                                        </span>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white/5 text-gray-300">
-                                            Coming Soon
-                                        </span>
-                                    </div>
-                                    <div class="flex space-x-3">
-                                        <a href="#" class="px-3 py-1.5 bg-secondary text-white rounded-lg text-sm hover:bg-secondary/90 transition-all duration-300 shadow-glow-blue">
-                                            <i class="fa fa-download mr-1"></i> PDF
-                                        </a>
-                                        <a href="#" class="px-3 py-1.5 border border-gray-700 text-gray-300 rounded-lg text-sm hover:bg-white/5 transition-all duration-300">
-                                            <i class="fa fa-external-link mr-1"></i> more
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    
+                <!-- 第二行：描述 -->
+                <p class="text-gray-300 text-sm mt-1 ml-[6.25rem]">
+                    A compact yet reasoning-intensive benchmark specifically designed to probe the limits of multimodal clinical reasoning in neurology.
+                </p>
+            </div>
+            </div>       
                     <!-- 加载更多按钮 -->
                     <div class="mt-10 text-center">
                         <button class="px-6 py-2.5 border border-primary/30 text-primary rounded-lg hover:bg-primary/10 transition-all duration-300 hover:shadow-glow">
-                            <i class="fa fa-refresh mr-2"></i> more papers...
+                            <i class="fa fa-refresh mr-2"></i> More News...
                         </button>
                     </div>
                 </div>
@@ -566,53 +582,77 @@
                     <p class="text-gray-400">Pioneering the exploration of large models in neuro-medicine, empowering AI-driven precision diagnosis and treatment of neurological disorders.</p>
                 </div>
                 
-                <!-- 联系信息 -->
-                <div class="max-w-3xl mx-auto glass rounded-xl p-8 border border-white/10 shadow-card">
-                    <h3 class="text-xl font-semibold text-center mb-8">Contact Us</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-lg font-medium mb-4 flex items-center">
-                                <i class="fa fa-map-marker text-primary mr-2"></i> Hugging Face
-                            </h4>
-                            <p class="text-gray-400 mb-6">这里需要一个hugging face的链接</p>
-                            
-                            <h4 class="text-lg font-medium mb-4 flex items-center">
-                                <i class="fa fa-envelope text-primary mr-2"></i> Email
-                            </h4>
-                            <p class="text-gray-400 mb-6">jiamengting@gdiist.cn</p>
-                        </div>
-                        
-                        <div>
-                            
-                            <h4 class="text-lg font-medium mb-4 flex items-center">
-                                <i class="fa fa-weixin text-primary mr-2"></i> Official Website
-                            </h4>
-                            <p class="text-gray-400 mb-6">https://www.gdiist.cn/</p>
-                            </h4>
-                            <div class="bg-dark-card p-2 inline-block rounded-lg border border-white/10">
-                                <img src="https://imgur.com/a/T7drtsb" alt="微信公众号二维码" class="w-32 h-32">
-                            </div>
-                        </div>
+        <!-- 联系信息 + 社交媒体 -->
+        <div class="w-full scroll-reveal glass rounded-xl p-8 border border-white/10 shadow-card">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 左半列 -->
+                <div>
+                    <h4 class="text-lg font-medium mb-4 flex items-center">
+                        <i class="fa fa-map-marker text-primary mr-2"></i> Hugging Face
+                    </h4>
+                    <p class="text-gray-400 mb-6">
+                        <a href="https://huggingface.co" target="_blank" class="text-primary hover:underline">https://huggingface.co</a>
+                    </p>
+
+                    <h4 class="text-lg font-medium mb-4 flex items-center">
+                        <i class="fa fa-envelope text-primary mr-2"></i> Citation
+                    </h4>
+                    <div class="bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 rounded-2xl p-5 text-gray-100 text-sm mb-6 max-h-56 overflow-y-auto shadow-md">
+                        XXX, et al. Neuro-MedBench: A Multimodal Benchmark for Clinical Reasoning in Neurology. 2025.
+                        <br>
+                        DOI: 10.xxxx/xxxx
+                        <br>
+                        Additional citation details can go here. This box supports longer text with scroll.
                     </div>
-                    
-                    <!-- 社交媒体 -->
-                    <div class="mt-10 text-center">
-                        <h4 class="text-lg font-medium mb-6">Follow Us</h4>
-                        <div class="flex justify-center space-x-6">
-                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
-                                <i class="fa fa-weibo text-xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
-                                <i class="fa fa-github text-xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
-                                <i class="fa fa-linkedin text-xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 rounded-full bg-dark-card flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow">
-                                <i class="fa fa-twitter text-xl"></i>
-                            </a>
-                        </div>
-                    </div>
+                </div>
+
+                <!-- 右半列 -->
+                <div>
+                    <h4 class="text-lg font-medium mb-2 flex items-center">
+                        <i class="fa fa-exclamation-triangle text-primary mr-2"></i> Disclaimer
+                    </h4>
+                    <p class="text-gray-400 text-sm mb-6">
+                        Neural-MedBench is for research purposes only. Models evaluated on Neural-MedBench can produce unexpected results. We are not responsible for any damages caused by the use of Neural-MedBench, including but not limited to, any loss of profit, data, or use of data.
+                    </p>
+
+                    <h4 class="text-lg font-medium mb-2 flex items-center">
+                        <i class="fa fa-gavel text-primary mr-2"></i> License
+                    </h4>
+                    <p class="text-gray-400 text-sm mb-6">
+                        This project is licensed under the MIT License.
+                    </p>
+
+                    <h4 class="text-lg font-medium mb-4 flex items-center">
+                        <i class="fa fa-weixin text-primary mr-2"></i> Official Website
+                    </h4>
+                    <p class="text-gray-400 mb-6">
+                        <a href="https://www.gdiist.cn/" target="_blank" class="text-primary hover:underline">https://www.gdiist.cn/</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 社交媒体放在框内部最下面 -->
+            <div class="mt-10 text-center">
+                <h4 class="text-lg font-medium mb-6">Follow Us</h4>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="p-3 bg-dark-card hover:opacity-80 transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow rounded-lg">
+                        <img src="img/logo/zny.png" alt="Weibo" class="max-h-24">
+                    </a>
+                    <a href="#" class="p-3 bg-dark-card hover:opacity-80 transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow rounded-lg">
+                        <img src="img/logo/b.png" alt="GitHub" class="max-h-24">
+                    </a>
+                    <a href="#" class="p-3 bg-dark-card hover:opacity-80 transition-all duration-300 border border-white/10 hover:border-primary/30 hover:shadow-glow rounded-lg">
+                        <img src="img/logo/a.jpg" alt="Twitter" class="max-h-24">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
                 </div>
             </div>
         </section>
@@ -637,7 +677,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="#ranking" class="text-gray-400 hover:text-primary transition-all duration-300">Leaderboard</a></li>
                         <li><a href="#datasets" class="text-gray-400 hover:text-primary transition-all duration-300">Dataset</a></li>
-                        <li><a href="#papers" class="text-gray-400 hover:text-primary transition-all duration-300">Paper</a></li>
+                        <li><a href="#News" class="text-gray-400 hover:text-primary transition-all duration-300">News</a></li>
                         <li><a href="#about" class="text-gray-400 hover:text-primary transition-all duration-300">About Us</a></li>
                     </ul>
                 </div>
