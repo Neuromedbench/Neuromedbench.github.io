@@ -428,15 +428,6 @@ function renderTable() {
                             <span class="text-sm ${bertScoreColor}">${model.bertscore.toFixed(2)}</span>
                         </div>
                     ` : ''}
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <span class="text-sm text-gray-400">${model.version}</span>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap">
-                    <button class="text-primary hover:text-primary/80 transition-colors">
-                        <i class="fa fa-angle-right"></i>
-                    </button>
-                </td>
             `;
 
             tableBody.appendChild(row);
@@ -484,7 +475,7 @@ function downloadDataset(datasetKey) {
 // 下载完整数据集函数
 function downloadCompleteDataset() {
     // 注意：文件名以 datasets 目录现有文件为准（含命名中的拼写）
-    const filePath = 'datasets/neuromedben-complete-dateset.zip';
+    const filePath = 'datasets/neuralmedbench.zip';
     const fileName = filePath.split('/').pop();
 
     // 创建下载链接
