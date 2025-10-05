@@ -417,7 +417,7 @@
                             <div class="absolute inset-0 bg-grid opacity-30"></div>
                             <i class="fa fa-bolt text-accent text-6xl group-hover:scale-110 transition-transform duration-500"></i>
                         </div>
-                        <div class="p-6">
+                        <div class="p-6"> 
                             <h3 class="text-xl font-semibold text-white mb-2">Multi-round Dialogue</h3>
                             <p class="text-gray-400 mb-4 text-sm">Simulated consult-style dialogue requiring iterative reasoning and multimodal synthesis.</p>
                             <div class="flex flex-wrap gap-2 mb-4">
@@ -487,27 +487,35 @@
                     <div class="w-full scroll-reveal">
             <!-- News 1 -->
             <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3">
+                <!-- 图标 -->
                 <span class="text-yellow-400 text-lg">📃</span>
-                <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
-                    <!-- 发光日期 -->
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
-                                bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 
-                                shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">
-                    2025-09-26
-                    </span>
-                    <span>Neural-Benchmark: Pioneering Research Now Live on 
-                    <a href="https://arxiv.org/abs/2509.22258" 
-                    target="_blank" 
-                    class="text-emerald-400 hover:underline">
-                    arXiv
-                    </a>
-            </div>
-                     <!-- 第二行：描述 -->
-                    <p class="text-gray-300 text-sm mt-1 ml-[6.25rem]">
-                        Miao, J. et al. (2025). Beyond classification accuracy: Neural-MedBench and the need for deeper reasoning benchmarks. arXiv preprint arXiv:2509.22258 [cs.CV].
+            
+                <!-- 主标题 -->
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
+                        <!-- 发光日期 -->
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                    bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 
+                                    shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">
+                            2025-09-26
+                        </span>
+                        <span>
+                            Neural-Benchmark: Pioneering Research Now Live on 
+                            <a href="https://arxiv.org/abs/2509.22258" 
+                               target="_blank" 
+                               class="text-emerald-400 hover:underline font-medium">
+                                arXiv
+                            </a>
+                        </span>
+                    </h3>
+            
+                    <!-- 描述文字（小字）- 现在正确嵌套在 .glass 内 -->
+                    <p class="text-gray-300 text-sm mt-2">
+                        Miao, J. et al. (2025). Beyond classification accuracy: Neural-MedBench and the need for deeper reasoning benchmarks. <em>arXiv preprint arXiv:2509.22258 [cs.CV]</em>.
                     </p>
+                </div>
             </div>
-            </div>     
+                        
             <!-- News 2 -->
             <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3">
                 <span class="text-yellow-400 text-lg">🚀</span>
