@@ -15,9 +15,12 @@ const modelData = {
             { id: 11, name: "HuatuoGPT-7B", resolved: 10.0, pass5: 20.0, modelSize: 75, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Moonshot AI", date: "2025-08-07" },
             { id: 12, name: "MedGemma-27B-it", resolved: 16.7, pass5: 43.3, modelSize: 75, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Moonshot AI", date: "2025-08-07" },
             { id: 13, name: "Claude 4 Sonnet", resolved: 30.0, pass5: 36.7, modelSize: 75, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Moonshot AI", date: "2025-08-07" },
+            { id: 14, name: "GPT-5 2025-08-07", resolved: 36.7, pass5: 43.3, modelSize: 1800, version: "gpt-5-2025-08-07", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "OpenAI", date: "2025-08-07" },
+            { id: 15, name: "gemini-2.5-pro", resolved: 30, pass5: 50.0, modelSize: 1560, version: "gemini-2.5-pro-preview-06-05", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Google", date: "2025-08-07" },
+            { id: 16, name: "Lingshu-7B", resolved: 26.7, pass5: 40.0, modelSize: 7, version: "Lingshu-7B", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Alibaba", date: "2025-06-08" },
         ],
         lite: [
-            { id: 1, name: "GPT-4 2025-03-26", resolved: 8.3, pass5: 40.0, bertscore: 0.70, modelSize: 220, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "OpenAI", date: "2025-03-26" },
+            { id: 1, name: "GPT-4o 2025-03-26", resolved: 8.3, pass5: 40.0, bertscore: 0.70, modelSize: 220, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "OpenAI", date: "2025-03-26" },
             { id: 2, name: "Gemini 2.5-Flash", resolved: 13.3, pass5: 35.0, bertscore: 0.76, modelSize: 180, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Google", date: "2025-05-21" },
             { id: 3, name: "Gemini 2.0-Flash", resolved: 11.7, pass5: 23.3, bertscore: 0.68, modelSize: 130, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Google", date: "2025-05-21" },
             { id: 4, name: "Claude 3.7 Sonnet", resolved: 8.3, pass5: 31.7, bertscore: 0.73, modelSize: 120, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Anthropic", date: "2025-05-21" },
@@ -30,9 +33,12 @@ const modelData = {
             { id: 11, name: "HuatouGPT-7B", resolved: 5.0, pass5: 13.3, bertscore: 0.60, modelSize: 160, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Huatuo", date: "2025-08-07" },
             { id: 12, name: "MedGemma-27B-it", resolved: 13.3, pass5: 31.6, bertscore: 0.78, modelSize: 75, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Moonshot AI", date: "2025-08-07" },
             { id: 13, name: "Claude 4 Sonnet", resolved: 18.3, pass5: 38.3, bertscore: 0.80, modelSize: 75, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Moonshot AI", date: "2025-08-07" },
-        ],
+            { id: 14, name: "GPT-5 2025-08-07", resolved: 28.3, pass5: 45.0, bertscore: 0.80, modelSize: 1800, version: "gpt-5-2025-08-07", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "OpenAI", date: "2025-08-07" },
+            { id: 15, name: "gemini-2.5-pro", resolved: 15, pass5: 38.3, bertscore: 0.77, modelSize: 1560, version: "gemini-2.5-pro-preview-06-05", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Google", date: "2025-08-07" },
+            { id: 16, name: "Lingshu-7B", resolved: 21.7, pass5: 35.0, bertscore: 0.75, modelSize: 7, version: "Lingshu-7B", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Alibaba", date: "2025-06-08" },
+         ],
         multimodal: [
-            { id: 1, name: "GPT-4 2025-03-26", resolved: 8.5, pass5: 16.5, bertscore: 0.73, modelSize: 220, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "OpenAI", date: "2025-03-26" },
+            { id: 1, name: "GPT-4o 2025-03-26", resolved: 8.5, pass5: 16.5, bertscore: 0.73, modelSize: 220, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "OpenAI", date: "2025-03-26" },
             { id: 2, name: "Gemini 2.5-Flash", resolved: 10.5, pass5: 18.5, bertscore: 0.68, modelSize: 180, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Google", date: "2025-05-21" },
             { id: 3, name: "Gemini 2.0-Flash", resolved: 9.0, pass5: 16.0, bertscore: 0.67, modelSize: 130, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Google", date: "2025-05-21" },
             { id: 4, name: "Claude 3.7 Sonnet", resolved: 7.5, pass5: 12.0, bertscore: 0.66, modelSize: 120, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Anthropic", date: "2025-05-21" },
@@ -45,6 +51,9 @@ const modelData = {
             { id: 11, name: "HuatouGPT-7B", resolved: 3.0, pass5: 7.0, bertscore: 0.68, modelSize: 160, version: "1.0.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Huatuo", date: "2025-08-07" },
             { id: 12, name: "MedGemma-27B-it", resolved: 6.5, pass5: 18.0, bertscore: 0.77, modelSize: 75, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Moonshot AI", date: "2025-08-07" },
             { id: 13, name: "Claude 4 Sonnet", resolved: 10.5, pass5: 15.5, bertscore: 0.75, modelSize: 75, version: "1.7.0", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Moonshot AI", date: "2025-08-07" },
+            { id: 14, name: "GPT-5 2025-08-07", resolved: 19.5, pass5: 27.5, bertscore: 0.81, modelSize: 1800, version: "gpt-5-2025-08-07", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "OpenAI", date: "2025-08-07" },
+            { id: 15, name: "gemini-2.5-pro", resolved: 11.5, pass5: 18.5, bertscore: 0.72, modelSize: 1560, version: "gemini-2.5-pro-preview-06-05", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Google", date: "2025-08-07" },
+            { id: 16, name: "Lingshu-7B", resolved: 8.5, pass5: 20.0, bertscore: 0.73, modelSize: 7, version: "Lingshu-7B", logs: true, trajs: true, new: true, verified: true, Accuracy_Pass5: "Alibaba", date: "2025-06-08" },
         ]
     },
     "2.0": {            //这里是2.0的预存接口，可以写好代码放在这里，实际上和dataset那一栏一样，写一个“我们正在来的路上”
