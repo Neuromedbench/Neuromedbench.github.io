@@ -23,7 +23,7 @@ function initChart() {
     }
     
     // 准备图表数据
-    const chartData = filteredModels.slice(0, 10).map(model => ({
+    const chartData = filteredModels.slice(0, 20).map(model => ({
         x: model.modelSize,
         y: model.resolved,
         label: model.name,
