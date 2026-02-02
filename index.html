@@ -485,26 +485,27 @@
                     </div>
 
                     <div class="w-full scroll-reveal">
-            <!-- News 1 -->
-            <!-- 修复方案：双层结构 -->
+            <!-- News 1 --> 
+            <!-- 修复方案：双层结构 --> 
             <!-- 1. 外层容器：只负责【位置移动】和【阴影】。必须有 rounded-xl 让阴影贴合圆角，但不能有 overflow-hidden -->
-            <div class="relative rounded-xl transition-all duration-500 transform hover:-translate-y-1 hover:shadow-glow shadow-card group">
-                
-                <!-- 2. 内层容器：负责【背景(glass)】、【圆角裁切(overflow-hidden)】和【内容】 -->
-                <!-- 这里的 overflow-hidden 负责裁切烟花 Canvas，防止它溢出圆角 -->
-                <div class="glass rounded-xl overflow-hidden relative p-6 flex items-start space-x-3 h-full">
-                    
-                    <!-- 烟花 Canvas：放在内层，绝对定位，z-0 -->
-                    <canvas class="fireworks-canvas" class="absolute inset-0 pointer-events-none z-0 w-full h-full"></canvas>
-                    
-                    <!-- 实际文本内容：z-10 确保浮在烟花上面 -->
-                    <div class="relative z-10 flex items-start space-x-3">
-                        <span class="text-blue-400 text-lg">🎉</span>
-                        <h3 class="text-lg font-semibold text-white flex items-center space-x-2 flex-wrap gap-y-2">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse mr-2">2026-01-25</span>
-                            <span>Neural-MedBench has been formally accepted for publication at the 2026 International Conference on Learning Representations (ICLR 2026).</span>
-                        </h3>
-                    </div>
+            <div class="relative rounded-xl transition-all duration-500 transform hover:-translate-y-1 hover:shadow-glow shadow-card group"> 
+                <!-- 2. 内层容器：负责【背景(glass)】、【圆角裁切(overflow-hidden)】和【内容】 --> <!-- 这里的 overflow-hidden 负责裁切烟花 Canvas，防止它溢出圆角 --> 
+                <div class="glass rounded-xl overflow-hidden relative p-6 flex items-start space-x-3 h-full"> 
+                    <!-- 烟花 Canvas：放在内层，绝对定位，z-0 --> 
+                    <canvas id="fireworks-canvas" class="absolute inset-0 pointer-events-none z-0 w-full h-full"></canvas> 
+                    <!-- 实际文本内容：z-10 确保浮在烟花上面 --> 
+                    <div class="relative z-10 flex items-start space-x-3"> 
+                        <span class="text-blue-400 text-lg">🎉</span> <h3 class="text-lg font-semibold text-white flex items-center space-x-2 flex-wrap gap-y-2"> 
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                                        bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 
+                                        shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse mr-2">
+                                2026-01-25
+                            </span> 
+                            <span>
+                                Neural-MedBench has been formally accepted for publication at the 2026 International Conference on Learning Representations (ICLR 2026).
+                            </span> 
+                        </h3> 
+                    </div> 
                 </div>
             </div>
 
@@ -793,67 +794,5 @@
     <script src="js/navigation.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/main.js"></script>
-    <script>
-    document.querySelectorAll('.fireworks-canvas').forEach(canvas => {
-    const ctx = canvas.getContext('2d')
-
-    function resize() {
-        canvas.width = canvas.offsetWidth
-        canvas.height = canvas.offsetHeight
-    }
-    resize()
-    window.addEventListener('resize', resize)
-
-    let particles = []
-
-    function spawnFirework() {
-        const x = Math.random() * canvas.width
-        const y = Math.random() * canvas.height * 0.6
-        const count = 30 + Math.random() * 20
-
-        for (let i = 0; i < count; i++) {
-        particles.push({
-            x, y,
-            vx: (Math.random() - 0.5) * 4,
-            vy: (Math.random() - 0.5) * 4,
-            life: 60,
-            color: `hsl(${Math.random() * 360}, 100%, 70%)`
-        })
-        }
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-        particles.forEach((p, i) => {
-        p.x += p.vx
-        p.y += p.vy
-        p.vy += 0.05
-        p.life--
-
-        ctx.fillStyle = p.color
-        ctx.globalAlpha = p.life / 60
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2)
-        ctx.fill()
-
-        if (p.life <= 0) particles.splice(i, 1)
-        })
-
-        ctx.globalAlpha = 1
-        requestAnimationFrame(animate)
-    }
-
-    // 只在 hover 时触发
-    const card = canvas.closest('.group')
-    card.addEventListener('mouseenter', () => {
-        spawnFirework()
-        spawnFirework()
-    })
-
-    animate()
-    })
-    </script>
-
 
     </body></html>
