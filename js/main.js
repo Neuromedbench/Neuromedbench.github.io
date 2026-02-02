@@ -540,3 +540,99 @@ function showDownloadNotification(fileName) {
         }, 300);
     }, 3000);
 }
+
+
+
+// ===== 烟花动画 for News 1 =====
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('news-1-container');
+    const canvas = document.getElementById('fireworks-canvas');
+    
+    if (!container || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId = null;
+
+    // 设置 canvas 尺寸
+    function resizeCanvas() {
+        const rect = container.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // 粒子类
+    class Particle {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = (Math.random() - 0.5) * 4;
+            this.speedY = (Math.random() - 0.5) * 4;
+            this.color = `hsl(${Math.random() * 60 + 150}, 100%, 70%)`; // 青绿色系
+            this.life = 100; // 生命周期
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            this.life--;
+            this.speedY += 0.02; // 微重力
+        }
+
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.life / 100;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    // 发射一组粒子
+    function explode(x, y) {
+        const count = 15 + Math.floor(Math.random() * 10);
+        for (let i = 0; i < count; i++) {
+            particles.push(new Particle(x, y));
+        }
+    }
+
+    // 主动画循环
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 偶尔发射烟花（每 1～2 秒一次）
+        if (Math.random() < 0.02) {
+            const x = Math.random() * canvas.width;
+            const y = canvas.height; // 从底部发射
+            explode(x, y);
+        }
+
+        // 更新和绘制粒子
+        for (let i = particles.length - 1; i >= 0; i--) {
+            particles[i].update();
+            particles[i].draw();
+            if (particles[i].life <= 0) {
+                particles.splice(i, 1);
+            }
+        }
+
+        animationId = requestAnimationFrame(animate);
+    }
+
+    // 启动动画
+    animate();
+
+    // 页面隐藏时暂停（可选优化）
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden && animationId) {
+            cancelAnimationFrame(animationId);
+        } else if (!document.hidden) {
+            animate();
+        }
+    });
+});
