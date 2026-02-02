@@ -487,14 +487,18 @@
                     <div class="w-full scroll-reveal">
 
             <!-- News 1 -->
-            <div id="news-1-container" class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3 relative overflow-hidden">
-            <!-- 烟花 Canvas（新增） -->
+            <div class="relative overflow-hidden rounded-xl"> <!-- 外层：只管裁剪和圆角 -->
+            <!-- 烟花 Canvas -->
             <canvas id="fireworks-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
-            <span class="text-blue-400 text-lg">🎉</span>
-            <h3 class="text-lg font-semibold text-white flex items-center space-x-2 z-10">
+            
+            <!-- 内层：真正的新闻卡片，带阴影和边框 -->
+            <div class="glass rounded-xl p-6 hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card flex items-start space-x-3 relative z-10">
+                <span class="text-blue-400 text-lg">🎉</span>
+                <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">2026-01-25</span>
                 <span>Neural-MedBench has been formally accepted for publication at the 2026 International Conference on Learning Representations (ICLR 2026).</span>
-            </h3>
+                </h3>
+            </div>
             </div>
 
             <!-- News 2 -->
@@ -782,5 +786,5 @@
     <script src="js/navigation.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/main.js"></script>
-    
+
     </body></html>
