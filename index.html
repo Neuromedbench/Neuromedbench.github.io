@@ -485,20 +485,26 @@
                     </div>
 
                     <div class="w-full scroll-reveal">
-
             <!-- News 1 -->
-            <!-- 修复方案：将 glass, hover效果, shadow 等样式移到最外层 div -->
-            <div class="relative overflow-hidden rounded-xl glass hover:shadow-glow transition-all duration-500 transform hover:-translate-y-1 shadow-card group"> 
-                <!-- 烟花 Canvas (作为背景层) -->
-                <canvas id="fireworks-canvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+            <!-- 修复方案：双层结构 -->
+            <!-- 1. 外层容器：只负责【位置移动】和【阴影】。必须有 rounded-xl 让阴影贴合圆角，但不能有 overflow-hidden -->
+            <div class="relative rounded-xl transition-all duration-500 transform hover:-translate-y-1 hover:shadow-glow shadow-card group">
                 
-                <!-- 内容区域 (移除视觉样式，只保留布局和层级) -->
-                <div class="p-6 flex items-start space-x-3 relative z-10">
-                    <span class="text-blue-400 text-lg">🎉</span>
-                    <h3 class="text-lg font-semibold text-white flex items-center space-x-2">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse">2026-01-25</span>
-                        <span>Neural-MedBench has been formally accepted for publication at the 2026 International Conference on Learning Representations (ICLR 2026).</span>
-                    </h3>
+                <!-- 2. 内层容器：负责【背景(glass)】、【圆角裁切(overflow-hidden)】和【内容】 -->
+                <!-- 这里的 overflow-hidden 负责裁切烟花 Canvas，防止它溢出圆角 -->
+                <div class="glass rounded-xl overflow-hidden relative p-6 flex items-start space-x-3 h-full">
+                    
+                    <!-- 烟花 Canvas：放在内层，绝对定位，z-0 -->
+                    <canvas id="fireworks-canvas" class="absolute inset-0 pointer-events-none z-0 w-full h-full"></canvas>
+                    
+                    <!-- 实际文本内容：z-10 确保浮在烟花上面 -->
+                    <div class="relative z-10 flex items-start space-x-3">
+                        <span class="text-blue-400 text-lg">🎉</span>
+                        <h3 class="text-lg font-semibold text-white flex items-center space-x-2 flex-wrap gap-y-2">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-400/30 shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse mr-2">2026-01-25</span>
+                            <span>Neural-MedBench has been formally accepted for publication at the 2026 International Conference on Learning Representations (ICLR 2026).</span>
+                        </h3>
+                    </div>
                 </div>
             </div>
 
